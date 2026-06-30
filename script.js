@@ -1,199 +1,96 @@
 /* ========================= */
 /* HanJunSeo Portfolio */
+/* script.js */
 /* ========================= */
 
-const darkButton = document.getElementById("darkmode");
+/* 다크모드 */
 
-if (darkButton) {
+const darkBtn = document.getElementById("darkmode");
 
-    darkButton.addEventListener("click", () => {
+let dark = false;
 
-        document.body.classList.toggle("dark");
+darkBtn.addEventListener("click", () => {
 
-        const icon = darkButton.querySelector("i");
+    dark = !dark;
 
-        if (document.body.classList.contains("dark")) {
+    if(dark){
 
-            icon.className = "fa-solid fa-sun";
+        document.body.style.background = "#0f172a";
+        document.body.style.color = "white";
 
-        } else {
-
-            icon.className = "fa-solid fa-moon";
-
-        }
-
-    });
-
-}
-
-/* ========================= */
-/* Fade Up Animation */
-/* ========================= */
-
-const observer = new IntersectionObserver((entries) => {
-
-    entries.forEach((entry) => {
-
-        if (entry.isIntersecting) {
-
-            entry.target.classList.add("show");
-
-        }
-
-    });
-
-}, {
-
-    threshold: 0.15
-
-});
-
-document.querySelectorAll("section").forEach((section) => {
-
-    section.classList.add("fade-up");
-
-    observer.observe(section);
-
-});
-
-/* ========================= */
-/* Skill Animation */
-/* ========================= */
-
-const skills = document.querySelectorAll(".fill");
-
-const skillObserver = new IntersectionObserver((entries)=>{
-
-    entries.forEach((entry)=>{
-
-        if(entry.isIntersecting){
-
-            entry.target.style.opacity="1";
-
-        }
-
-    });
-
-});
-
-skills.forEach((skill)=>{
-
-    skillObserver.observe(skill);
-
-});
-
-/* ========================= */
-/* Header Shadow */
-/* ========================= */
-
-const header = document.querySelector("header");
-
-window.addEventListener("scroll",()=>{
-
-    if(window.scrollY > 30){
-
-        header.style.boxShadow="0 20px 50px rgba(0,0,0,.15)";
+        darkBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
 
     }else{
 
-        header.style.boxShadow="0 20px 50px rgba(0,0,0,.08)";
+        document.body.style.background = "#f8fafc";
+        document.body.style.color = "#1e293b";
+
+        darkBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
 
     }
 
 });
 
-/* ========================= */
-/* Button Ripple */
-/* ========================= */
 
-document.querySelectorAll(".btn,.btn2,.project-btn").forEach(button=>{
+/* 프로젝트 준비중 */
 
-button.addEventListener("click",(e)=>{
+function comingSoon(event){
 
-const ripple=document.createElement("span");
+    event.preventDefault();
 
-const rect=button.getBoundingClientRect();
-
-const size=Math.max(rect.width,rect.height);
-
-ripple.style.width=size+"px";
-ripple.style.height=size+"px";
-
-ripple.style.left=e.clientX-rect.left-size/2+"px";
-ripple.style.top=e.clientY-rect.top-size/2+"px";
-
-ripple.classList.add("ripple");
-
-button.appendChild(ripple);
-
-setTimeout(()=>{
-
-ripple.remove();
-
-},600);
-
-});
-
-});
-
-/* ========================= */
-/* Mouse Glow */
-/* ========================= */
-
-const glow=document.createElement("div");
-
-glow.className="mouse-glow";
-
-document.body.appendChild(glow);
-
-document.addEventListener("mousemove",(e)=>{
-
-glow.style.left=e.clientX+"px";
-
-glow.style.top=e.clientY+"px";
-
-});
-
-/* ========================= */
-/* Scroll To Top */
-/* ========================= */
-
-const topButton=document.createElement("button");
-
-topButton.innerHTML="↑";
-
-topButton.className="top-btn";
-
-document.body.appendChild(topButton);
-
-topButton.onclick=()=>{
-
-window.scrollTo({
-
-top:0,
-
-behavior:"smooth"
-
-});
-
-};
-
-window.addEventListener("scroll",()=>{
-
-if(window.scrollY>500){
-
-topButton.classList.add("show");
-
-}else{
-
-topButton.classList.remove("show");
+    alert("🚧 아직 준비중입니다!");
 
 }
 
+
+/* 스크롤 애니메이션 */
+
+const observer = new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.style.opacity="1";
+            entry.target.style.transform="translateY(0px)";
+
+        }
+
+    });
+
 });
 
-/* ========================= */
-/* Console */
-/* ========================= */
+document.querySelectorAll("section").forEach(section=>{
 
-console.log("HanJunSeo Portfolio Loaded 🚀");
+    section.style.opacity="0";
+    section.style.transform="translateY(50px)";
+    section.style.transition=".8s";
+
+    observer.observe(section);
+
+});
+
+
+/* 부드러운 스크롤 */
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+
+    anchor.addEventListener("click",function(e){
+
+        e.preventDefault();
+
+        const target=document.querySelector(this.getAttribute("href"));
+
+        if(target){
+
+            target.scrollIntoView({
+
+                behavior:"smooth"
+
+            });
+
+        }
+
+    });
+
+});
