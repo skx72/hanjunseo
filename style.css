@@ -1139,3 +1139,121 @@ font-size:16px;
 /* ========================= */
 /* End */
 /* ========================= */
+/* ========================= */
+/* Ripple */
+/* ========================= */
+
+.btn,
+.btn2,
+.project-btn{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.ripple{
+
+position:absolute;
+
+border-radius:50%;
+
+background:rgba(255,255,255,.4);
+
+transform:scale(0);
+
+animation:ripple .6s linear;
+
+pointer-events:none;
+
+}
+
+@keyframes ripple{
+
+to{
+
+transform:scale(4);
+
+opacity:0;
+
+}
+
+}
+
+/* ========================= */
+
+.mouse-glow{
+
+position:fixed;
+
+width:250px;
+
+height:250px;
+
+border-radius:50%;
+
+background:radial-gradient(circle,
+rgba(99,102,241,.18),
+transparent 70%);
+
+pointer-events:none;
+
+transform:translate(-50%,-50%);
+
+z-index:-1;
+
+transition:left .08s linear,
+top .08s linear;
+
+}
+
+/* ========================= */
+
+.top-btn{
+
+position:fixed;
+
+right:30px;
+
+bottom:30px;
+
+width:55px;
+
+height:55px;
+
+border:none;
+
+border-radius:50%;
+
+font-size:22px;
+
+cursor:pointer;
+
+background:linear-gradient(135deg,#6366f1,#8b5cf6);
+
+color:white;
+
+box-shadow:0 15px 35px rgba(99,102,241,.3);
+
+opacity:0;
+
+transform:translateY(20px);
+
+transition:.35s;
+
+}
+
+.top-btn.show{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+.top-btn:hover{
+
+transform:translateY(-6px);
+
+}
